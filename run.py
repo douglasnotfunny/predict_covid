@@ -10,8 +10,6 @@ from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 
-
-
 df = pd.read_csv('data.csv')
 all_columns = df.columns
 
