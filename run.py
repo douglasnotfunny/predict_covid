@@ -12,7 +12,22 @@ import numpy as np
 df = pd.read_csv('data.csv')
 all_columns = df.columns
 
+index_start = 0
+count = 1
+index_start = 0
 
+for d in df['location']:
+    if d=="World" and index_start == 0:
+        index_start = count + 1
+    if index_start!=0 and d!= "World":
+        index_end = count - 1
+        break
+    count+=1
+
+print(index_start, index_end)
+
+df = df.iloc[index_start:index_end]
+print(df)
 
 '''df_types = df.dtypes
 aggregation_columns = {}
