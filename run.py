@@ -22,10 +22,9 @@ for d in df_types:
         aggregation_columns[name_column] = str(d)
     count+=1
 
-print(aggregation_columns)
+df = df.groupby(by=["location"]).sum()
+df.to_csv('out.csv')
 
-
-# df_new = df.groupby(df['iso_code']).aggregate(aggregation_functions)
 
 '''print(f"DF: {df}")
 
