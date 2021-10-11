@@ -23,14 +23,6 @@ for d in df_types:
     count+=1
 
 df = df.groupby(by=["location"]).sum()
-df.to_csv('out.csv')
-
-
-'''print(f"DF: {df}")
-
-df = df.T
-print(f"DF: {df}")
-
 
 for f in df.columns: 
     if df[f].dtype=='object': 
@@ -53,4 +45,4 @@ preds = xg_reg.predict(X_test)
 rmse = np.sqrt(mean_squared_error(y_test, preds))
 print(f"RMSE: {rmse}")
 print(f"Score: {score}")
-print(f"Predição {preds}")'''
+print(f"Predição {preds}")
