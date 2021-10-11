@@ -28,7 +28,7 @@ def get_predict_world(location):
 
     print(index_start, index_end)
 
-    df = df.iloc[index_end-30:index_end]
+    df = df.iloc[index_end-15:index_end]
 
     for f in df.columns: 
         if df[f].dtype=='object': 
@@ -42,7 +42,7 @@ def get_predict_world(location):
     next_value = 0
     count = 0
 
-    for i in range(100):
+    for i in range(20):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
 
         xg_reg = xgb.XGBRegressor(n_estimators = 300, learning_rate=0.01)
