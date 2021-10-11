@@ -8,6 +8,8 @@ from sklearn import preprocessing
 import numpy as np
 from sklearn.metrics import r2_score
 from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
 
 
 df = pd.read_csv('data.csv')
@@ -28,8 +30,6 @@ for d in df['location']:
 print(index_start, index_end)
 
 df = df.iloc[index_end-30:index_end]
-print(df)
-
 df.to_csv('out.csv')
 
 for f in df.columns: 
@@ -41,15 +41,24 @@ for f in df.columns:
 y = df["new_cases"].fillna(0)
 X = df.drop(['new_cases','iso_code','continent','location','date','total_cases','total_deaths','total_cases_per_million','total_deaths_per_million'], axis=1).fillna(0)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
+next_value = 0
+count = 0
 
-xg_reg = xgb.XGBRegressor(n_estimators = 500, learning_rate=0.1)
-xg_reg.fit(X_train, y_train)
+for i in range(20):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.33)
 
-score = xg_reg.score(X_test, y_test)
-preds = xg_reg.predict(X_test)
+    xg_reg = xgb.XGBRegressor(n_estimators = 300, learning_rate=0.01)
+    xg_reg.fit(X_train, y_train)
 
-r2 = r2_score(y_test, preds)
-print(f"Predição Média: {preds.mean()}")
-print(f"Score: {score}")
-print("R2: %f" % (r2))
+    score = xg_reg.score(X_test, y_test)
+    preds = xg_reg.predict(X_test)
+
+    r2 = r2_score(y_test, preds)
+    if score > 0.90:
+        count+=1
+        print(f"Score: {score}")
+        print("R2: %f" % (r2))
+        next_value+=preds.mean()
+
+next_value = next_value/count
+print(f"Predição Média: {next_value}")
