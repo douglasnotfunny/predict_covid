@@ -12,7 +12,9 @@ import numpy as np
 df = pd.read_csv('data.csv')
 all_columns = df.columns
 
-df_types = df.dtypes
+
+
+'''df_types = df.dtypes
 aggregation_columns = {}
 count = 0
 
@@ -45,4 +47,4 @@ preds = xg_reg.predict(X_test)
 rmse = np.sqrt(mean_squared_error(y_test, preds))
 print(f"RMSE: {rmse}")
 print(f"Score: {score}")
-print(f"Predição {preds}")
+print(f"Predição {preds}")'''
